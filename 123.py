@@ -1,14 +1,14 @@
 import cv2
 import numpy as np
 
-img = cv2.imread("/home/pi/juice.jpg",0)
-ret, bw =cv2.threshold(img,74,255,cv2.THRESH_BINARY)
+img = cv2.imread("Capture.PNG",0)
+ret, bw =cv2.threshold(img,100,255,cv2.THRESH_BINARY)
 img = 255 - bw 
 cv2.imshow("Binary",bw)
-r1 = 150
-r2 = 210
-c1 = 235
-c2 = 350
+r1 = 230
+r2 = 285
+c1 = 270
+c2 = 400
 cut_image = img[r1:r2,c1:c2]
 cv2.imshow("cut image", cut_image)
 cut = cut_image
