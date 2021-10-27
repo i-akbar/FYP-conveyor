@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import math
+import pygame
 
 img = cv2.imread("/home/pi/juice.jpg",0)
 ret, bw =cv2.threshold(img,74,255,cv2.THRESH_BINARY)
@@ -62,8 +63,8 @@ cv2.imshow("Date", date)
 row,col = date.shape
 col = 0
 colarr = []
-i = 0
-flag = False
+i = 0 
+flag = False 
 while i < 8:
     roi4 = date[0:row,col:col+1]
     if(cv2.countNonZero(roi4)==0):
@@ -121,20 +122,21 @@ def get_coords(x, y, angle, imwidth, imheight):
 #     print("endy2",endy2)
     return endx1, endy1, endx2, endy2
 #get_coords(60,30,25,imwidth , imheight)
-
 print(get_coords(60,30,20,imwidth , imheight))
-
-hmm=cv2.line(roi,(198,80),(-55,-12),(0,200,200),(3))
+hmm=cv2.line(roi,(198,80),(-55,-12),(0,255,0),(3))
 #lakir=cv2.line(img,(0,500),(500,0),(0,200,200),(10))
-number=0
-while True:
-    if(cv2.countNonZero(hmm)==0):
-        print("image is black")
-        break;
-    else:
-        print("image is not black")
-        number=number+1
-        break;
-print("number of digit = ",number)
+#axi taa na msha
+# coordinate = []
+# x = 0
+# y = 0
+# while y < 60: #many axi hi munm
+#     while x < 120:
+#         coordinate.append((x,y))
+#         x += 1
+#     coordinate.append((x,y))
+#     y += 1
+# print(coordinate)
+
+
 cv2.imshow("img",roi)
 cv2.waitKey(0)
