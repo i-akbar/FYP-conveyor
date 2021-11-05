@@ -3,7 +3,7 @@ import numpy as np
 import math
 import pygame
 
-img = cv2.imread("/home/pi/juice.jpg",0)
+img = cv2.imread("frame.jpg",0)
 ret, bw =cv2.threshold(img,74,255,cv2.THRESH_BINARY)
 # cv2.imshow("ds",img)
 img = 255 - bw
