@@ -9,17 +9,22 @@ import collections
 import time 
 from PIL import Image  #pyhton imaging library(image editing cabilities)
 
-img = cv2.imread("pic4.jpg",0)  #fetch image
-ret, bw =cv2.threshold(img,100,255,cv2.THRESH_BINARY) #setting threshold 
+img = cv2.imread("3-3-3.jpg",0)  #fetch image
+ret, bw =cv2.threshold(img,125,255,cv2.THRESH_BINARY) #setting threshold 
 # cv2.imshow("ds",img)
 img = 255 - bw
 #cv2.imshow('img0',img)
-
+rows,col=img.shape
+print("rows",rows)
+print("col",col)
 #cv2.waitKey()
-img = img[215:258,280:365] #crop for pic4
-# img = img[200:260,290:430]
+#img = img[215:258,280:365] #crop for pic4
 #img = img[135:174,310:450]  #crop for pic1 (uper,lower,left,right)
-#img = img[150:210,230:350]   #crop for juice
+# img = img[150:210,230:350]   #crop for juice
+# img = img[185:250,200:305]   #for Db 1 for threshold-100
+#img = img[210:280,120:305]  #for Db 2 for threshold-110
+img = img[175:240,180:330]  #for Db 3 for threshold-125
+
 
 cv2.imshow('img',img)
 cv2.waitKey()
@@ -257,22 +262,27 @@ plt.plot(arraycoln,color = 'navy',marker='o')
 print("arraycoln ", arraycoln)
 flag = True
 colwhite=[]
-px = 3
+px = 5
 for x in range(0,len(arraycoln)):
     if(x+1!=len(arraycoln)):
         
         #if(flag):
-            if(px>3):
-                if(arraycoln[x]==0 and arraycoln[x+1] > 0 or arraycoln[x]>0 and arraycoln[x]<=6 and arraycoln[x+1] >=0 ):#for juice last condition x+1=>0  
+            if(px>4 and flag):
+                if(arraycoln[x]==0 and arraycoln[x+1] > 0
+                   or arraycoln[x]>0 and arraycoln[x]<=6
+                   and arraycoln[x+1] >=0 ):#for juice last condition x+1=>0  
                     colwhite.append(x)
                     flag = False
                     px=0
             else:
     #             pass
                 px=px+1
-            #if(arraycoln[x]>7):
-                
-               # flag = True
+                if(arraycoln[x]>7):
+#                     if(colwhite(len(colwhite)-1) != x-1 ):
+#                     if(flag == False):
+#                         colwhite.append(x)    
+                        
+                    flag = True
     else:
         pass
 print(len(colwhite))
@@ -281,7 +291,7 @@ Y=[]
 for j in range(0,len(colwhite)):
     startpoint=(colwhite[j],0)
     endpoint=(colwhite[j],rows)
-    picture=cv2.line(expiry,startpoint,endpoint,(255,0,0),1)
+#     picture=cv2.line(expiry,startpoint,endpoint,(255,0,0),1)
     ln= len(colwhite)
     row,col=picture.shape
 #     print("length", ln)
@@ -293,7 +303,11 @@ for j in range(0,len(colwhite)):
         sec_ind= colwhite[j+1]
     roi = expiry[0:row,f_ind:sec_ind]
 #     cv2.imshow("me",roi)
-    Y.append(roi)
+    bbox = cv2.boundingRect(roi)
+
+    x, y, w, h = bbox
+    abc = roi[y:y+h, x:x+w]
+    Y.append(abc)
 cv2.imshow("Crop 0",Y[0])
 cv2.imshow("Croped 1 ",Y[1])
 cv2.imshow("Croped 2",Y[2])
@@ -301,7 +315,7 @@ cv2.imshow("Croped 3",Y[3])
 cv2.imshow("Croped 4",Y[4])
 cv2.imshow("Croped 5",Y[5])
 cv2.imshow("Croped 6",Y[6])
-cv2.imshow("Croped 7",Y[7])
+#cv2.imshow("Croped 7",Y[7])
 #cv2.imshow("Croped 8",Y[8])
 #  cv2.imshow("Croped 9",Y[9])
 #  cv2.imshow("Croped 10",Y[10])
