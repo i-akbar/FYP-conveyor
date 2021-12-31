@@ -75,20 +75,21 @@ while i < 8:
             
             colarr.append(col)
             i = i+1
+            
     else:
         flag = True
-    
+    break;
     col = col +1
 i =0
 # #while i < len(colarr):
-# cv2.imshow("digit 1",date[0:row,0:colarr[0]])
-# cv2.imshow("digit 2",date[0:row,colarr[0]:colarr[1]])
-# cv2.imshow("digit 3",date[0:row,colarr[1]:colarr[2]])
-# cv2.imshow("digit 4",date[0:row,colarr[2]:colarr[3]])
-# cv2.imshow("digit 5",date[0:row,colarr[3]:colarr[4]])
-# cv2.imshow("digit 6",date[0:row,colarr[4]:colarr[5]])
-# cv2.imshow("digit 7",date[0:row,colarr[5]:colarr[6]])
-# cv2.imshow("digit 8",date[0:row,colarr[6]:colarr[7]])
+cv2.imshow("digit 1",date[0:row,0:colarr[0]])
+cv2.imshow("digit 2",date[0:row,colarr[0]:colarr[1]])
+cv2.imshow("digit 3",date[0:row,colarr[1]:colarr[2]])
+cv2.imshow("digit 4",date[0:row,colarr[2]:colarr[3]])
+cv2.imshow("digit 5",date[0:row,colarr[3]:colarr[4]])
+cv2.imshow("digit 6",date[0:row,colarr[4]:colarr[5]])
+cv2.imshow("digit 7",date[0:row,colarr[5]:colarr[6]])
+cv2.imshow("digit 8",date[0:row,colarr[6]:colarr[7]])
 
 # angle = 25
 # length = 50

@@ -11,7 +11,7 @@ cv2.imshow('frame', frame)
 # quitting button you may use any
 # desired button of your choice
 cv2.waitKey()
-#cv2.imwrite('frame.jpg',frame)
+cv2.imwrite('pic2.jpg',frame)
 # After the loop release the cap object
 vid.release()
 # Destroy all the windows

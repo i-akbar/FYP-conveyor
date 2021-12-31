@@ -79,6 +79,8 @@ for x in range(1,21,5):
     print("angle",x)
     hmm=cv2.line(roi,(endx1,endy1),(endx2,endy2),(0,255,0),(1))
     cv2.imshow("img",hmm)
+    hihi=imutils.rotate_bound(hmm,-10)
+    cv2.imshow("hmm",hihi)
     print("x and y asta")
     X = (endx1-endx2)
     Y = (endy1-endy2)
@@ -94,6 +96,7 @@ for x in range(1,21,5):
     print("Y axis", Yarray)
     plt.plot(Yarray)
     plt.show()
+    
 
     
         
@@ -102,7 +105,7 @@ for x in range(1,21,5):
 #hmm=cv2.line(roi,(endx1,endy1),(endx2,endy2),(0,255,0),(1))
 #hmm=hmm[endx1:endy1,endx2:endy2]
 #for(i in range(1,20))
-hmm=imutils.rotate(hmm,3)
+
     
 
 # print("x and y asta")
