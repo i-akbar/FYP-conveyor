@@ -9,8 +9,13 @@ import collections
 import time
 from PIL import Image  # pyhton imaging library(image editing cabilities)
 
+<<<<<<< HEAD
 img = cv2.imread("/home/pi/FYP/FYPdatabase/8.jpg",0)  # fetch image
 ret, bw = cv2.threshold(img, 110, 255, cv2.THRESH_BINARY)  # setting threshold
+=======
+img = cv2.imread("pic1.jpg", 0)  # fetch image
+ret, bw = cv2.threshold(img, 95, 255, cv2.THRESH_BINARY)  # setting threshold
+>>>>>>> 5e593c28dc7d38af906aaa31d77c0cb63bb2097c
 # cv2.imshow("ds",img)
 img = 255 - bw
 # cv2.imshow('img0',img)
@@ -18,6 +23,7 @@ img = 255 - bw
 # cv2.waitKey()
 # img = img[215:258, 280:365]  # crop for pic4
 # img = img[200:260,290:430]
+<<<<<<< HEAD
 # img = img[135:174,310:450]  #crop for pic1 (uper,lower,left,right)
 # img = img[150:210,230:350]   #crop for juice
 
@@ -28,6 +34,11 @@ img = 255 - bw
 # img = img[210:280,150:305] #for Db 6, threshold-100
 # img = img[150:225,230:350] #for Db 7, threshold-100
 img = img[130:180,290:400]
+=======
+img = img[135:174,310:450]  #crop for pic1 (uper,lower,left,right)
+# img = img[150:210,230:350]   #crop for juice
+
+>>>>>>> 5e593c28dc7d38af906aaa31d77c0cb63bb2097c
 cv2.imshow('img', img)
 cv2.waitKey()
 rows, cols = img.shape
@@ -332,4 +343,8 @@ plt.show()
 # plt.title("angle: "+str(0) )
 # plt.show()
 
+<<<<<<< HEAD
 cv2.waitKey()
+=======
+cv2.waitKey()
+>>>>>>> 5e593c28dc7d38af906aaa31d77c0cb63bb2097c
