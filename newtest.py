@@ -1,29 +1,17 @@
-import cv2  # computer vision-2
-import numpy as np
-import math
-# import pygame #oopen source lib, to make games and other multi media app
+import cv2
 import imutils  # to make IP function, translation, rotation, resizing, displaying matplotlib images
 import matplotlib.pyplot as plt
-from array import *
 import collections
-import time
-from PIL import Image  # pyhton imaging library(image editing cabilities)
 
+img = cv2.imread(r"C:\Users\akbar\Desktop\FYP\FYP-conveyor\FYPdatabase\10.jpg", 0)  # fetch image
+ret, bw = cv2.threshold(img, 115, 255, cv2.THRESH_BINARY)  # setting threshold
 
-img = cv2.imread("/home/pi/FYP/FYPdatabase/8.jpg",0)  # fetch image
-ret, bw = cv2.threshold(img, 110, 255, cv2.THRESH_BINARY)  # setting threshold
-
-img = cv2.imread("pic1.jpg", 0)  # fetch image
-ret, bw = cv2.threshold(img, 95, 255, cv2.THRESH_BINARY)  # setting threshold
-
-# cv2.imshow("ds",img)
 img = 255 - bw
 # cv2.imshow('img0',img)
 
 # cv2.waitKey()
 # img = img[215:258, 280:365]  # crop for pic4
 # img = img[200:260,290:430]
-
 # img = img[135:174,310:450]  #crop for pic1 (uper,lower,left,right)
 # img = img[150:210,230:350]   #crop for juice
 
@@ -33,9 +21,9 @@ img = 255 - bw
 # img = img[185:240,200:320]  #for Db 5,threshold-110
 # img = img[210:280,150:305] #for Db 6, threshold-100
 # img = img[150:225,230:350] #for Db 7, threshold-100
-img = img[130:180,290:400]
-
-img = img[135:174,310:450]  #crop for pic1 (uper,lower,left,right)
+# img = img[130:180,290:400] #DB 8
+img = img[120:180, 270:380]  # DB 8
+# img = img[135:174,310:450]  #crop for pic1 (uper,lower,left,right)
 # img = img[150:210,230:350]   #crop for juice
 
 cv2.imshow('img', img)
@@ -85,50 +73,6 @@ for angle in range(-10, 11, 1):
         arrcol.append(count)
     arr2.append(arrcol)
 
-# print("--------row--------")
-# for r in arr:
-#
-#     #print((r-2)*5 , " ")
-#     for c in r:
-#         print(c, end =" ")
-#     print()
-
-# ---------count white pixels in cloumns ------------------
-# arr2= []
-#
-# for angle in range(-10,11,5):
-#     #y = i/2
-#     arrcol = []
-#     imgr=imutils.rotate_bound(img,angle)
-#     for c in range(0,cols):
-#         count=0
-#         flag = False
-#         for r in range(0,rows):
-#             pixel = imgr[r:r+1,c:c+1]
-#             if cv2.countNonZero(pixel)!=0:
-#                 if(flag == False):
-#                     #flag = True
-#                     count = count + 1
-#             else:
-#                 flag = False
-#
-#         #print("angle:" , angle , "row:" , r , "white:",count)
-#         angleIndex = int((angle/5)+2)
-#         arrcol.append(count)
-#     arr2.insert(angleIndex,arrcol)
-# print("--------col-------")
-
-
-# for r in arr2:
-#
-#     #print((r-2)*5 , " ")
-#     for c in r:
-#         print(c, end =" ")
-#     print()
-
-
-# img2 = img[41:42,0:84]
-
 counter = []
 flag = True
 for i in range(0, 21):
@@ -153,13 +97,6 @@ maxIndex = counter.index(maxValue)
 angle = maxIndex - 10
 print(maxValue, angle)
 imgr = imutils.rotate_bound(img, angle)
-# **************************
-# print("shape : ",imgr.shape) era shafi kdad bekraya
-# for i in range(imgr.shape[0]):
-#     for j in range(imgr.shape[1]):
-#         if (imgr[i][j]==1):
-#             print("cordinates : ",i,j)
-
 
 cv2.imshow("rotated img", imgr)
 
@@ -182,29 +119,32 @@ for r in range(0, rows):
 print("arrayrow", arrayrow)
 
 counters = []
-flag = True
+flag = False
 counts = 0
+index = []
 for j in range(len(arrayrow)):
     if (flag):
-        if (arrayrow[j] < 5):  # threshhold ra ax 5 ta check mna
+        if j + 1 < len(arrayrow):
+            if (arrayrow[j + 1] > arrayrow[j] < 10):  # threshhold ra ax 5 ta check mna
 
-            counts = counts + 1
-            flag = False
+                index.append(j)
+                flag = False
     else:
-        if (temp[j] > 25):
+        if (temp[j] > 18):
             flag = True
 
-counters.append(counts)
-print("counters", counters)
+# counters.append(counts)
+# print("counters", counters)
+# -------------------------
 rowbow, colmol = imgr.shape
-print("rowbow", rowbow)
-index = []
-for i in range(0, len(arrayrow)):  # threshhold ra ax 13 ta bad mila
-    if (arrayrow[i] != 0):
-        if (arrayrow[i] < 13):
-            index.append(i)
+# print("rowbow", rowbow)
+# index = []
+# for i in range(0, len(arrayrow)):  # threshhold ra ax 13 ta bad mila
+#     if (arrayrow[i] != 0):
+#         if (arrayrow[i] < 13):
+#             index.append(i)
 
-print(len(index))
+print("indeeeex", len(index))
 X = []
 for j in range(0, len(index)):
 
@@ -240,8 +180,8 @@ cv2.imshow("1st image", X[0])  # for pic4
 #  cv2.imshow("4rth image",X[3])
 #  cv2.imshow("picture",picture)
 # cv2.imshow("picture2",crop_image)
-expiry = X[1]
-menufacture = X[2]
+expiry = X[0]
+menufacture = X[1]
 rows, cols = expiry.shape
 # print("expiry row",ex_row)
 # print("expiry col",ex_col)
@@ -264,23 +204,28 @@ for c in range(0, cols):
 
 plt.plot(arraycoln, color='navy', marker='o')
 print("arraycoln ", arraycoln)
-flag = True
+flag = False
 colwhite = []
-px = 5
+px = 7
 for x in range(0, len(arraycoln)):
     if x + 1 != len(arraycoln):
 
         # if(flag):
-        if px > 4:
-            if arraycoln[x] <= arraycoln[x + 1]:
-                if (arraycoln[x] == 0 and arraycoln[x + 1] > 0 or 0 < arraycoln[x] <= 6
-                        and arraycoln[x + 1] >= 0):  # for juice last condition x+1=>0
-                    colwhite.append(x)
-                    # flag = False
-                    px = 0
+        if px > 6:
+            # if (arraycoln[x] < arraycoln[x + 1] and arraycoln[x+1] != 0):
+            if (arraycoln[x] < arraycoln[x + 1] != 0
+                    and arraycoln[x] <= 6):  # for juice last condition x+1=>0
+                colwhite.append(x)
+                flag = False
+                px = 0
         else:
             #             pass
-            px = px + 1
+
+            if arraycoln[x] > 0:
+                flag = True
+
+            if flag:
+                px = px + 1
         # if(arraycoln[x]>7):
 
         # flag = True
@@ -309,7 +254,7 @@ for j in range(0, len(colwhite)):
     rect = roi[y:y + h, x:x + w]
     # resized = cv2.resize(rect, (20, 30), interpolation=cv2.INTER_AREA)
 
-    Y.append(rect)
+    Y.append(roi)
 cv2.imshow("Crop 0", Y[0])
 cv2.imshow("Croped 1 ", Y[1])
 cv2.imshow("Croped 2", Y[2])
@@ -328,19 +273,6 @@ cv2.imshow("new", picture)
 print("length of Y:", (len(Y)))
 plt.title("angle: " + str(0))
 plt.show()
-
-# axi bad nia
-# print("colnarray:",colarr)
-# cv2.imshow("digit 1",expiry[0:row,0:Y[0]])
-# cv2.imshow("digit 2",expiry[0:row,Y[0]:Y[1]])
-# cv2.imshow("digit 3",expiry[0:row,Y[1]:Y[2]])
-# cv2.imshow("digit 4",expiry[0:row,Y[2]:Y[3]])
-# cv2.imshow("digit 5",expiry[0:row,Y[3]:Y[4]])
-# cv2.imshow("digit 6",expiry[0:row,Y[4]:Y[5]])
-# cv2.imshow("digit 7",expiry[0:row,Y[5]:Y[6]])
-# cv2.imshow("digit 8",expiry[0:row,Y[6]:Y[7]])
-# plt.title("angle: "+str(0) )
-# plt.show()
 
 cv2.waitKey()
 cv2.waitKey()
