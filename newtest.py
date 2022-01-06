@@ -3,9 +3,9 @@ import imutils  # to make IP function, translation, rotation, resizing, displayi
 import matplotlib.pyplot as plt
 import collections
 
-# img = cv2.imread(r"C:\Users\akbar\Desktop\FYP\FYP-conveyor\FYPdatabase\10.jpg", 0)  # Akbar pc
-img = cv2.imread(r"D:\semester7\FYP1\FYP-conveyor\FYPdatabase\11.jpg", 0)  # Cheeni pc
-ret, bw = cv2.threshold(img, 105, 255, cv2.THRESH_BINARY)  # setting threshold
+img = cv2.imread(r"C:\Users\akbar\Desktop\FYP\FYP-conveyor\FYPdatabase\10.jpg", 0)  # Akbar pc
+# img = cv2.imread(r"D:\semester7\FYP1\FYP-conveyor\FYPdatabase\9.jpg", 0)  # Cheeni pc
+ret, bw = cv2.threshold(img, 110, 255, cv2.THRESH_BINARY)  # setting threshold
 
 img = 255 - bw
 # cv2.imshow('img0',img)
@@ -23,8 +23,8 @@ img = 255 - bw
 # img = img[210:280,150:305] #for Db 6, threshold-100
 # img = img[150:225,230:350] #for Db 7, threshold-100
 # img = img[130:180,290:400] #DB 8
-#img = img[120:180, 270:380] # DB 9 10
-img = img[110:160, 280:400] #DB 11
+img = img[120:180, 270:380] # DB 9 10
+# img = img[110:160, 280:400] #DB 11
 # img = img[110:170, 280:400] #DB 12 thrshhold 100
 # img = img[120:170, 280:380] #DB 12-12 and bd 12-12-12 thshhold 90
 # img = img[100:160, 280:400] #DB 13 thshhold 100
@@ -44,7 +44,7 @@ arr2 = []
 for angle in range(-10, 11, 1):
     # y = i/2
     arrrow = []
-    imgr = imutils.rotate_bound(img, angle)
+    imgr = imutils.rotate(img, angle)
     for r in range(0, rows):
         count = 0
         flag = False
@@ -63,7 +63,7 @@ for angle in range(-10, 11, 1):
     arr.append(arrrow)
 
     arrcol = []
-    imgr = imutils.rotate_bound(img, angle)
+    imgr = imutils.rotate(img, angle)
     for c in range(0, cols):
         count = 0
         flag = False
@@ -88,7 +88,7 @@ for i in range(0, 21):
     count = 0
     for j in range(len(temp)):
         if (flag):
-            if (temp[j] <5):
+            if (temp[j] < 8):
                 count = count + 1
 
                 #                 print("value count :",count)
@@ -104,7 +104,7 @@ maxValue = max(counter)
 maxIndex = counter.index(maxValue)
 angle = maxIndex - 10
 print(maxValue, angle)
-imgr = imutils.rotate_bound(img, angle)
+imgr = imutils.rotate(img, angle)
 
 cv2.imshow("rotated img", imgr)
 
@@ -128,14 +128,14 @@ plt.show()
 print("arrayrow", arrayrow)
 
 counters = []
-flag = False
+flag = True
 counts = 0
 index = []
 for j in range(len(arrayrow)):
     if flag:
         print(flag)
-        if j + 1 < len(arrayrow):
-            if arrayrow[j + 1] > arrayrow[j] <=13:  # threshhold ra ax 5 ta check mna
+        if j + 2 < len(arrayrow):
+            if arrayrow[j + 1] > arrayrow[j] <11 and arrayrow[j+2] > arrayrow[j]:  # threshhold ra ax 5 ta check mna
                 index.append(j)
                 flag = False
                 print(flag)
@@ -217,19 +217,20 @@ flag = False
 colwhite = []
 px = 7
 for x in range(0, len(arraycoln)):
-    if x + 1 != len(arraycoln):
+    if x + 2 < len(arraycoln):
 
         # if(flag):
         if px > 6:
             # if (arraycoln[x] < arraycoln[x + 1] and arraycoln[x+1] != 0):
-            if (arraycoln[x] < arraycoln[x + 1] != 0
-                    and arraycoln[x] <= 5):  # for juice last condition x+1=>0
+            print(arraycoln[x])
+            if (arraycoln[x+2] > arraycoln[x] <= arraycoln[x + 1]  # != 0
+                    and arraycoln[x] <= 6):  # for juice last condition x+1=>0
                 colwhite.append(x)
                 flag = False
                 px = 0
         else:
             #             pass
-
+            # px = px+1
             if arraycoln[x] > 0:
                 flag = True
 
@@ -271,16 +272,13 @@ cv2.imshow("Croped 3", Y[3])
 cv2.imshow("Croped 4", Y[4])
 cv2.imshow("Croped 5", Y[5])
 cv2.imshow("Croped 6", Y[6])
-#cv2.imshow("Croped 7", Y[7])
-# cv2.imwrite("0.0027.jpg",Y[0])
-# cv2.imwrite("2.0042.jpg",Y[1])
-# cv2.imwrite("1.0049.jpg",Y[3])
-# cv2.imwrite("2.0042.jpg",Y[4])
-# cv2.imwrite("2.0043.jpg",Y[5])
-# cv2.imwrite("1.0050.jpg",Y[6])
-# cv2.imwrite("2.0032.jpg",Y[6])
-#cv2.imwrite("2.0029.jpg",Y[6])
-# cv2.imwrite("2.0030.jpg",Y[7])
+cv2.imshow("Croped 7", Y[7])
+# cv2.imwrite("1.0003.jpg",Y[0])
+# cv2.imwrite("1.0004.jpg",Y[1])
+# cv2.imwrite("1.0005.jpg",Y[3])
+# cv2.imwrite("1.0006.jpg",Y[4])
+# cv2.imwrite("2.0011.jpg",Y[6])
+# cv2.imwrite("1.0007.jpg",Y[7])
 # cv2.imshow("Croped 8", Y[8])
 # cv2.imshow("Croped 9",Y[9])
 #  cv2.imshow("Croped 10",Y[10])
