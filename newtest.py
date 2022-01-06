@@ -3,8 +3,9 @@ import imutils  # to make IP function, translation, rotation, resizing, displayi
 import matplotlib.pyplot as plt
 import collections
 
-img = cv2.imread(r"C:\Users\akbar\Desktop\FYP\FYP-conveyor\FYPdatabase\10.jpg", 0)  # fetch image
-ret, bw = cv2.threshold(img, 115, 255, cv2.THRESH_BINARY)  # setting threshold
+# img = cv2.imread(r"C:\Users\akbar\Desktop\FYP\FYP-conveyor\FYPdatabase\10.jpg", 0)  # Akbar pc fetch image
+img = cv2.imread(r"D:\semester7\FYP1\FYP-conveyor\FYPdatabase\1.jpg", 0)  # Cheeni pc
+ret, bw = cv2.threshold(img, 100, 255, cv2.THRESH_BINARY)  # setting threshold
 
 img = 255 - bw
 # cv2.imshow('img0',img)
@@ -18,11 +19,19 @@ img = 255 - bw
 # img = img[185:250,200:305]   #for Db 1,threshold-100
 # img = img[210:280,120:305]  #for Db 2, threshold-110
 # img = img[175:240,180:330]  #for Db 3, threshold-125
-# img = img[185:240,200:320]  #for Db 5,threshold-110
-# img = img[210:280,150:305] #for Db 6, threshold-100
-# img = img[150:225,230:350] #for Db 7, threshold-100
+#img = img[120:174,300:410]     # db 4 , threshhold 120
+#img = img[185:240,200:320]  #for Db 5,threshold-110
+#img = img[210:280,150:305] #for Db 6, threshold-100
+#img = img[150:225,230:350] #for Db 7, threshold-100
 # img = img[130:180,290:400] #DB 8
-img = img[120:180, 270:380]  # DB 8
+# img = img[120:180, 270:380]  # DB 9 10
+#img = img[110:160, 280:400] #DB 11
+#img = img[110:170, 280:400] #DB 12 thrshhold 100
+#img = img[120:170, 280:380] #DB 12-12 and bd 12-12-12 thshhold 90
+#img = img[100:160, 280:400] #DB 13 thshhold 100
+img = img[100:160, 280:400] #DB 13 thshhold 100
+
+
 # img = img[135:174,310:450]  #crop for pic1 (uper,lower,left,right)
 # img = img[150:210,230:350]   #crop for juice
 
@@ -80,7 +89,7 @@ for i in range(0, 21):
     count = 0
     for j in range(len(temp)):
         if (flag):
-            if (temp[j] < 5):
+            if (temp[j] < 7):
                 count = count + 1
 
                 #                 print("value count :",count)
@@ -115,7 +124,8 @@ for r in range(0, rows):
         else:
             flag = False
     arrayrow.append(count)
-# plt.plot(arrayrow,color = 'navy',marker='o')
+plt.plot(arrayrow,color = 'navy',marker='o')
+plt.show()
 print("arrayrow", arrayrow)
 
 counters = []
@@ -123,14 +133,15 @@ flag = False
 counts = 0
 index = []
 for j in range(len(arrayrow)):
-    if (flag):
+    if flag:
+        print(flag)
         if j + 1 < len(arrayrow):
-            if (arrayrow[j + 1] > arrayrow[j] < 10):  # threshhold ra ax 5 ta check mna
-
+            if arrayrow[j + 1] > arrayrow[j] < 10:  # threshhold ra ax 5 ta check mna
                 index.append(j)
                 flag = False
+                print(flag)
     else:
-        if (temp[j] > 18):
+        if arrayrow[j] > 18:
             flag = True
 
 # counters.append(counts)
@@ -168,7 +179,7 @@ for j in range(0, len(index)):
     print("ind : ", f_ind)
     print("ind  2nd: ", sec_ind)
     #     print("roi size",(imgr[f_ind:sec_ind,10:120]).shape)
-    roi = imgr[f_ind:sec_ind, 10:col]  # image ra cut kdi sirf crop shi mny roi eshti
+    roi = imgr[f_ind:sec_ind, 0:col]  # image ra cut kdi sirf crop shi mny roi eshti
     cv2.imshow("picture", picture)
     X.append(roi)
 # for i in range(0,len(X)):
@@ -181,7 +192,7 @@ cv2.imshow("1st image", X[0])  # for pic4
 #  cv2.imshow("picture",picture)
 # cv2.imshow("picture2",crop_image)
 expiry = X[0]
-menufacture = X[1]
+menufacture = X[0]
 rows, cols = expiry.shape
 # print("expiry row",ex_row)
 # print("expiry col",ex_col)
@@ -214,7 +225,7 @@ for x in range(0, len(arraycoln)):
         if px > 6:
             # if (arraycoln[x] < arraycoln[x + 1] and arraycoln[x+1] != 0):
             if (arraycoln[x] < arraycoln[x + 1] != 0
-                    and arraycoln[x] <= 6):  # for juice last condition x+1=>0
+                    and arraycoln[x] <= 2):  # for juice last condition x+1=>0
                 colwhite.append(x)
                 flag = False
                 px = 0
@@ -261,8 +272,8 @@ cv2.imshow("Croped 2", Y[2])
 cv2.imshow("Croped 3", Y[3])
 cv2.imshow("Croped 4", Y[4])
 cv2.imshow("Croped 5", Y[5])
-cv2.imshow("Croped 6", Y[6])
-cv2.imshow("Croped 7", Y[7])
+# cv2.imshow("Croped 6", Y[6])
+# cv2.imshow("Croped 7", Y[7])
 # cv2.imshow("Croped 8", Y[8])
 # cv2.imshow("Croped 9",Y[9])
 #  cv2.imshow("Croped 10",Y[10])
@@ -271,7 +282,7 @@ cv2.imshow("Croped 7", Y[7])
 #  cv2.imshow("Croped 13",Y[13])
 cv2.imshow("new", picture)
 print("length of Y:", (len(Y)))
-plt.title("angle: " + str(0))
+plt.title("Expiry")
 plt.show()
 
 cv2.waitKey()

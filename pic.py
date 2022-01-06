@@ -12,7 +12,7 @@ cv2.imshow('image',img)
 # quitting button you may use any
 # desired button of your choice
 #cv2.imread('img',frame)
-cv2.imwrite("4-4-4.jpg",img)
+cv2.imwrite("FYPdatabase/4-4-4.jpg", img)
 cv2.waitKey(0)
 # After the loop release the cap object
 
