@@ -43,7 +43,7 @@ arr2 = []
 for angle in range(-10, 11, 1):
     # y = i/2
     arrrow = []
-    imgr = imutils.rotate_bound(img, angle)
+    imgr = imutils.rotate(img, angle)
     for r in range(0, rows):
         count = 0
         flag = False
@@ -62,7 +62,7 @@ for angle in range(-10, 11, 1):
     arr.append(arrrow)
 
     arrcol = []
-    imgr = imutils.rotate_bound(img, angle)
+    imgr = imutils.rotate(img, angle)
     for c in range(0, cols):
         count = 0
         flag = False
@@ -87,7 +87,7 @@ for i in range(0, 21):
     count = 0
     for j in range(len(temp)):
         if (flag):
-            if (temp[j] <5):
+            if (temp[j] <8):
                 count = count + 1
 
                 #                 print("value count :",count)
@@ -103,7 +103,7 @@ maxValue = max(counter)
 maxIndex = counter.index(maxValue)
 angle = maxIndex - 10
 print(maxValue, angle)
-imgr = imutils.rotate_bound(img, angle)
+imgr = imutils.rotate(img, angle)
 
 cv2.imshow("rotated img", imgr)
 
@@ -133,8 +133,11 @@ index = []
 for j in range(len(arrayrow)):
     if flag:
         print(flag)
+        # if j + 2 < len(arrayrow):
+        #     if arrayrow[j + 1] > arrayrow[j] < 11 and arrayrow[j + 2] > arrayrow[j]:
         if j + 1 < len(arrayrow):
-            if arrayrow[j + 1] > arrayrow[j] <=23:  # threshhold ra ax 5 ta check mna
+            if arrayrow[j + 1] > arrayrow[j] <=8:  # threshhold ra ax 5 ta check mna
+
                 index.append(j)
                 flag = False
                 print(flag)
@@ -221,6 +224,8 @@ for x in range(0, len(arraycoln)):
         # if(flag):
         if px > 6:
             # if (arraycoln[x] < arraycoln[x + 1] and arraycoln[x+1] != 0):
+            # if (arraycoln[x + 2] > arraycoln[x] <= arraycoln[x + 1]  # != 0
+            #         and arraycoln[x] <= 6):  # for juice last condition x+1=>0
             if (arraycoln[x] < arraycoln[x + 1] != 0
                     and arraycoln[x] <= 8):  # for juice last condition x+1=>0
                 colwhite.append(x)
