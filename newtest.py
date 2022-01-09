@@ -280,12 +280,12 @@ cv2.imshow("Croped 5", Y[5])
 cv2.imshow("Croped 6", Y[6])
 cv2.imshow("Croped 7", Y[7])
 # #
-cv2.imwrite("3.0017.jpg",Y[0])
-cv2.imwrite("0.0060.jpg",Y[1])
-cv2.imwrite("0.0061.jpg",Y[3])
-cv2.imwrite("5.0012.jpg",Y[4])
-cv2.imwrite("2.0098.jpg",Y[5])
-cv2.imwrite("2.0099.jpg",Y[7])
+cv2.imwrite("3.0018.jpg",Y[0])
+# cv2.imwrite("0.0060.jpg",Y[1])
+# cv2.imwrite("0.0061.jpg",Y[3])
+# cv2.imwrite("5.0012.jpg",Y[4])
+# cv2.imwrite("2.0098.jpg",Y[5])
+# cv2.imwrite("2.0099.jpg",Y[7])
 
 
 #cv2.imshow("Croped 8", Y[8])
