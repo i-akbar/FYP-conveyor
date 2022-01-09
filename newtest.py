@@ -4,8 +4,10 @@ import matplotlib.pyplot as plt
 import collections
 
 # img = cv2.imread(r"C:\Users\akbar\Desktop\FYP\FYP-conveyor\FYPdatabase\10.jpg", 0)  # Akbar pc
-img = cv2.imread(r"D:\semester7\FYP1\FYP-conveyor\FYPdatabase\4.jpg", 0)  # Cheeni pc
-ret, bw = cv2.threshold(img, 120, 255, cv2.THRESH_BINARY)  # setting threshold
+#img = cv2.imread(r"D:\semester7\FYP1\FYP-conveyor\FYPdatabase\1.jpg", 0)  # Cheeni pc
+img = cv2.imread(r"C:\fyp project\FYP-conveyor\FYPdatabase\5.jpg", 0)  # aatiqa pc
+
+ret, bw = cv2.threshold(img, 115, 255, cv2.THRESH_BINARY)  # setting threshold
 img = 255 - bw
 # cv2.imshow('img0',img)
 
@@ -16,9 +18,9 @@ img = 255 - bw
 # img = img[150:210,230:350]   #crop for juice
 #img = img[185:250,200:305]  #for Db 1,threshold-100
 #img = img[210:280,120:305]  #for Db 2, threshold-110
-#img = img[175:240,180:330]  #for Db 3, threshold-125
-img = img[120:174,300:410]   # db 4 , threshhold 120  Rthrshold 30 for 4-4-4
-#img = img[185:240,200:320] #for Db 5,threshold-110
+#img = img[175:250,180:330]  #for Db 3, threshold-125
+#img = img[120:174,300:410]   # db 4 , threshhold 120  Rthrshold 30 for 4-4-4
+img = img[175:230,200:320] #for Db 5,threshold-110
 # img = img[210:280,150:305] #for Db 6, threshold-100
 # img = img[150:225,230:350] #for Db 7, threshold-100
 # img = img[130:180,290:400] #DB 8
@@ -33,8 +35,8 @@ img = img[120:174,300:410]   # db 4 , threshhold 120  Rthrshold 30 for 4-4-4
 # img = img[135:174,310:450]  #crop for pic1 (uper,lower,left,right)
 # img = img[150:210,230:350]   #crop for juice
 
-# cv2.imshow('img', img)
-# cv2.waitKey()
+cv2.imshow('img', img)
+cv2.waitKey()
 rows, cols = img.shape
 # ---------count white pixels in rows ------------------
 arr = []
@@ -87,7 +89,7 @@ for i in range(0, 21):
     count = 0
     for j in range(len(temp)):
         if (flag):
-            if (temp[j] <8):
+            if (temp[j] <10):
                 count = count + 1
 
                 #                 print("value count :",count)
@@ -122,8 +124,8 @@ for r in range(0, rows):
         else:
             flag = False
     arrayrow.append(count)
-# plt.plot(arrayrow,color = 'navy',marker='o') uncmnt ths after database
-# plt.show()
+plt.plot(arrayrow,color = 'navy',marker='o') #uncmnt ths after database
+plt.show()
 print("arrayrow", arrayrow)
 
 counters = []
@@ -136,7 +138,7 @@ for j in range(len(arrayrow)):
         # if j + 2 < len(arrayrow):
         #     if arrayrow[j + 1] > arrayrow[j] < 11 and arrayrow[j + 2] > arrayrow[j]:
         if j + 1 < len(arrayrow):
-            if arrayrow[j + 1] > arrayrow[j] <=8:  # threshhold ra ax 5 ta check mna
+            if arrayrow[j + 1] > arrayrow[j] <=9:  # threshhold ra ax 5 ta check mna
 
                 index.append(j)
                 flag = False
@@ -192,7 +194,7 @@ cv2.imshow("1st image", X[0])  # for pic4
 #  cv2.imshow("4rth image",X[3])
 #  cv2.imshow("picture",picture)
 # cv2.imshow("picture2",crop_image)
-expiry = X[1]
+expiry = X[0    ]
 menufacture = X[0]
 rows, cols = expiry.shape
 # print("expiry row",ex_row)
@@ -269,26 +271,27 @@ for j in range(0, len(colwhite)):
     ret, bw = cv2.threshold(resized, 105, 255, cv2.THRESH_BINARY)
 
     Y.append(bw)
-# cv2.imshow("Crop 0", Y[0])
-# cv2.imshow("Croped 1 ", Y[1])
-# cv2.imshow("Croped 2", Y[2])
-# cv2.imshow("Croped 3", Y[3])
-# cv2.imshow("Croped 4", Y[4])
-# cv2.imshow("Croped 5", Y[5])
-#cv2.imshow("Croped 6", Y[6])
-# #cv2.imshow("Croped 7", Y[7])
-# cv2.imwrite("0.0002.jpg",Y[0])
-# cv2.imwrite("0.0004.jpg",Y[3])
-# cv2.imwrite("9.0002.jpg",Y[4])
-# cv2.imwrite("2.0002.jpg",Y[6])
-# cv2.imwrite("1.0002.jpg",Y[7])
-# cv2.imwrite("2.0032.jpg",Y[6])
-#cv2.imwrite("2.0029.jpg",Y[6])
-# cv2.imwrite("2.0030.jpg",Y[7])
-# cv2.imshow("Croped 8", Y[8])
-# cv2.imshow("Croped 9",Y[9])
-#  cv2.imshow("Croped 10",Y[10])
-#  cv2.imshow("Croped 11",Y[11])
+cv2.imshow("Crop 0", Y[0])
+cv2.imshow("Croped 1 ", Y[1])
+cv2.imshow("Croped 2", Y[2])
+cv2.imshow("Croped 3", Y[3])
+cv2.imshow("Croped 4", Y[4])
+cv2.imshow("Croped 5", Y[5])
+cv2.imshow("Croped 6", Y[6])
+cv2.imshow("Croped 7", Y[7])
+# #
+cv2.imwrite("3.0017.jpg",Y[0])
+cv2.imwrite("0.0060.jpg",Y[1])
+cv2.imwrite("0.0061.jpg",Y[3])
+cv2.imwrite("5.0012.jpg",Y[4])
+cv2.imwrite("2.0098.jpg",Y[5])
+cv2.imwrite("2.0099.jpg",Y[7])
+
+
+#cv2.imshow("Croped 8", Y[8])
+#cv2.imshow("Croped 9",Y[9])
+#cv2.imshow("Croped 10",Y[10])
+#cv2.imshow("Croped 11",Y[11])
 #  cv2.imshow("Croped 12",Y[12])
 #  cv2.imshow("Croped 13",Y[13])
 cv2.imshow("new", picture)
